@@ -1,0 +1,10 @@
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "localhost"
+watch = true
+exposedByDefault = true
+usebindportip = true
+swarmMode = false
+network = "web"
+[api]
+dashboard = true
