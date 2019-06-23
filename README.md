@@ -2,8 +2,8 @@
 Traefik template for developing locally
 
 ## Setup
-Clone the repo locally and change into that directory
-docker-compose.yml
+Clone the repo locally and change into /traefik-template  
+Here is what the docker-compose file looks like.  
 ```
 version: '3'
 
