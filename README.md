@@ -26,7 +26,6 @@ services:
       - 9999:9999
     labels:
       - "traefik.http.routers.influxdb.rule=Host('influx.localhost')"
-- "traefik.entrypoint.influx"
 ```
 ## Compose up
 Run the command:
