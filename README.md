@@ -26,6 +26,23 @@ services:
     labels:
       - "traefik.http.routers.influxdb.rule=Host('influx.localhost')"
 ```
+## Traefik.toml
+```
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "localhost"
+watch = true
+exposedByDefault = true
+usebindportip = true
+swarmMode = false
+network = "web"
+[api]
+dashboard = true
+entryPoint = "traefik"
+debug = true
+```
+This configuration is a basic setup to expose the dashboard.  
+
 ## Compose up
 Run the command:
 `docker-compose up` to watch the logs 
