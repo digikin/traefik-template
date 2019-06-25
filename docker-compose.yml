@@ -2,13 +2,12 @@ version: '3'
 
 services:
   traefik:
-    image: traefik:v2.0
-    command: --api --providers.docker
+    image: traefik:v1.7
+    command: --api --docker
     ports:
       - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /traefik.toml:/etc/traefik
   nginx:
     image: nginx:latest
     ports:
@@ -19,5 +18,3 @@ services:
       - 9999:9999
     labels:
       - "traefik.http.routers.influxdb.rule=Host('influx.localhost')"
-
-    
