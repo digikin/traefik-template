@@ -17,4 +17,5 @@ services:
     ports:
       - 9999:9999
     labels:
-      - "traefik.http.routers.influxdb.rule=Host('influx.localhost')"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:influx.localhost"

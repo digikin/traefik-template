@@ -23,8 +23,6 @@ services:
     image: quay.io/influxdb/influxdb:2.0.0-alpha
     ports:
       - 9999:9999
-    labels:
-      - "traefik.http.routers.influxdb.rule=Host('influx.localhost')"
 ```
 ## Traefik.toml
 ```
@@ -42,6 +40,7 @@ entryPoint = "traefik"
 debug = true
 ```
 This configuration is a basic setup to expose the dashboard.  
+Check it out.  
 
 ## Compose up
 Run the command:
