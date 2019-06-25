@@ -8,3 +8,5 @@ swarmMode = false
 network = "web"
 [api]
 dashboard = true
+entryPoint = "traefik"
+debug = true
