@@ -5,17 +5,36 @@ services:
     image: traefik:v1.7
     command: --api --docker
     ports:
-      - 8080:8080
+      - 80:80
+    networks:
+      - proxy
+    labels:
+      - "traefik.frontend.rule=Host:web.localhost"
+      - "traefik.port=8080"
     volumes:
+      - ./traefik.toml:/traefik.toml
       - /var/run/docker.sock:/var/run/docker.sock
   nginx:
     image: nginx:latest
-    ports:
-      - 80:80
+    networks:
+      - proxy
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=PathPrefix:/static/"
+      - "traefik.docker.network=proxy"
   influxdb:
     image: quay.io/influxdb/influxdb:2.0.0-alpha
-    ports:
-      - 9999:9999
+    networks: 
+      - proxy
     labels:
       - "traefik.enable=true"
+      - "traefik.backend=influx"
       - "traefik.frontend.rule=Host:influx.localhost"
+      - "traefik.docker.network=proxy"
+      - "traefik.port=9999"
+networks: 
+  proxy:
+    external: 
+      name: proxy
+  internal:
+    external: false

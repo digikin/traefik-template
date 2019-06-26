@@ -40,7 +40,15 @@ entryPoint = "traefik"
 debug = true
 ```
 This configuration is a basic setup to expose the dashboard.  
-Check it out.  
+Check it out. http://localhost:8080
+Now we are going to configure basic authorization to the backend and change the entry point through the toml file.  
+In the termial we need to create a htpasswd.
+```sudo apt-get install apache2-utils
+htpasswd -nb admin super_secret_password```
+Save the output and we will add to out traefik.toml.  
+```
+
+You should get somthing back like.  
 
 ## Compose up
 Run the command:

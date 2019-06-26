@@ -3,18 +3,8 @@ endpoint = "unix:///var/run/docker.sock"
 domain = "localhost"
 watch = true
 exposedByDefault = true
-usebindportip = true
-swarmMode = false
-network = "web"
-entryPoints.dash]
-address=":8080"
-[entryPoints.dash.auth]
-[entryPoints.dash.auth.basic]
-    users = [
-        "hakase:$apr1$hEgpZUN2$OYG3KwpzI3T1FqIg9LIbi.",
-    ]
 
-[api]
-dashboard = true
-entryPoint = "traefik"
-debug = true
+[web]
+address=":8080"
+  [web.auth.basic]
+  users = ["admin:$apr1$A3524hz3$4k45BqlgN1aiwOs1pjMD9."]
