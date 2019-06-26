@@ -1,0 +1,10 @@
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "localhost"
+watch = true
+exposedByDefault = true
+
+[web]
+address=":8080"
+  [web.auth.basic]
+  users = ["admin:$apr1$A3524hz3$4k45BqlgN1aiwOs1pjMD9."]
