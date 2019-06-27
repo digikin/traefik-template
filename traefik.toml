@@ -1,10 +1,17 @@
-[docker]
-endpoint = "unix:///var/run/docker.sock"
-domain = "localhost"
-watch = true
-exposedByDefault = true
+defaultEntryPoints = ["http"]
 
-[web]
-address=":8080"
-  [web.auth.basic]
-  users = ["admin:$apr1$A3524hz3$4k45BqlgN1aiwOs1pjMD9."]
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+
+[entryPoints.dash]
+  address=":8080"
+  [entryPoints.dash.auth]
+    [entryPoints.dash.auth.basic]
+    users = [
+      "admin:$apr1$A3524hz3$4k45BqlgN1aiwOs1pjMD9."
+    ]
+
+[api]
+entryPoint="dash"
+dashboard = true
