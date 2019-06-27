@@ -1,9 +1,10 @@
 # Template for local traefik development
-This is a basic docker-compose and toml for Traefik to create a development environment. The applications in the compose file are just in place for proof of concept.  Replace them for your needs.
+This is a basic docker-compose and toml for [Traefik](https://docs.traefik.io/) to create a development environment. The applications in the compose file are just in place for proof of concept.  Replace them for your needs.
 
 ## Pre-Flight rules
 1. Clone and change into the directory
-2. You must create the docker network proxy `docker network create proxy` before bringing up the environment.
+2. You must create the docker network before bringing up the environment.  
+`docker network create proxy`
 
 ## Docker-compose
 1. Static nginx website at http://localhost
