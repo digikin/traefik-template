@@ -11,9 +11,10 @@ This is a basic docker-compose and toml for [Traefik](https://docs.traefik.io/) 
 1. Static nginx website at http://localhost
 2. Influxdb 2.0 at http://influx.localhost
 3. Dashboard with basic auth http://web.localhost  Login info (admin:supersecret)
-
+![dashboard](./assets/dashboard.png)
 ## Developing
 If you want to replace the admin login information in the traefik.toml you will need to install htpasswd.  
+
 ![basic-auth](./assets/basicauth.png)
 
 ```
