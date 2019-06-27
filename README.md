@@ -14,6 +14,8 @@ This is a basic docker-compose and toml for [Traefik](https://docs.traefik.io/) 
 
 ## Developing
 If you want to replace the admin login information in the traefik.toml you will need to install htpasswd.
+![basic-auth](./assets/basicauth.png)
+
 ```
 sudo apt-get install apache2-utils -y
 htpasswd -nb <user> <secret_password>
