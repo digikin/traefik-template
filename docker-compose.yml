@@ -3,7 +3,7 @@ version: '3'
 services:
   traefik:
     image: traefik:v1.7
-    command: --api --docker
+    command: --docker
     ports:
       - 80:80
     networks:
@@ -11,6 +11,7 @@ services:
     labels:
       - "traefik.frontend.rule=Host:web.localhost"
       - "traefik.port=8080"
+      - "traefik.docker.network=proxy"
     volumes:
       - ./traefik.toml:/traefik.toml
       - /var/run/docker.sock:/var/run/docker.sock
