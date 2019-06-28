@@ -1,0 +1,74 @@
+version: '3.7'
+
+services:
+  traefik:
+    image: traefik:v1.7-alpine
+    command: 
+      - "--docker"
+      - "--api"
+      - "--docker.swarmMode"
+      - "--docker.domain=localhost"
+      - "--docker.watch"
+      - "--logLevel=DEBUG"
+      - "--metrics"
+      - "--entryPoints='Name:http Address::80'"
+      - "--entryPoints='Name:dash Address::8080 Auth.Basic.Users:admin:$$apr1$A3524hz3$$4k45BqlgN1aiwOs1pjMD9.'"
+    ports:
+      - target: 80
+        published: 80
+        mode: host   
+    networks:
+      - proxy
+    labels:
+      - "traefik.frontend.rule=Host:web.localhost"
+      - "traefik.port=8080"
+      - "traefik.docker.network=proxy"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  nginx:
+    image: nginx:latest
+    networks:
+      - proxy
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=PathPrefix:/static/"
+      - "traefik.bakend=nginx"
+      - "traefik.docker.network=proxy"
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 1
+        delay: 10s
+  influxdb:
+    image: quay.io/influxdb/influxdb:2.0.0-alpha
+    networks: 
+      - proxy
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.backend=influx"
+        - "traefik.frontend.rule=Host:influx.localhost"
+        - "traefik.docker.network=proxy"
+        - "traefik.port=9999"
+    placement:
+      constraints:
+      - node.role==manager
+      restart_policy:
+        condition: on-failure
+networks: 
+  proxy:
+    driver: overlay
+    name: traefik
+  inbound:
+    driver: overlay
+    name: inbound
