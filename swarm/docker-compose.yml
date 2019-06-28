@@ -16,13 +16,14 @@ services:
     ports:
       - target: 80
         published: 80
-        mode: host   
+        mode: host
     networks:
       - proxy
+      - inbound
     labels:
       - "traefik.frontend.rule=Host:web.localhost"
       - "traefik.port=8080"
-      - "traefik.docker.network=proxy"
+      - "traefik.docker.network=inbound"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
@@ -38,12 +39,12 @@ services:
   nginx:
     image: nginx:latest
     networks:
-      - proxy
+      - inbound
     labels: 
       - "traefik.enable=true"
       - "traefik.frontend.rule=PathPrefix:/static/"
       - "traefik.bakend=nginx"
-      - "traefik.docker.network=proxy"
+      - "traefik.docker.network=inbound"
     deploy:
       mode: global
       update_config:
@@ -52,13 +53,13 @@ services:
   influxdb:
     image: quay.io/influxdb/influxdb:2.0.0-alpha
     networks: 
-      - proxy
+      - inbound
     deploy:
       labels:
         - "traefik.enable=true"
         - "traefik.backend=influx"
         - "traefik.frontend.rule=Host:influx.localhost"
-        - "traefik.docker.network=proxy"
+        - "traefik.docker.network=inbound"
         - "traefik.port=9999"
     placement:
       constraints:
@@ -68,7 +69,7 @@ services:
 networks: 
   proxy:
     driver: overlay
-    name: traefik
+    name: proxy
   inbound:
     driver: overlay
     name: inbound
