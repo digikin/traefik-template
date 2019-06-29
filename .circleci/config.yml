@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    docker: true
     working_directory: ~/traefik-template
     steps:
       - checkout
