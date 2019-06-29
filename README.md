@@ -7,6 +7,9 @@ This is a basic docker-compose and toml for [Traefik](https://docs.traefik.io/) 
 `docker network create proxy`
 3. Run the command `docker-compose up` to view the logs or `docker-compose up -d` for it to run in the background.
 
+## Template
+This is a formated template that anyone can use for local development.  
+
 ## Docker-compose
 1. Static nginx website at http://localhost
 2. Influxdb 2.0 at http://influx.localhost

@@ -11,7 +11,6 @@ services:
       - "--docker.watch"
       - "--logLevel=DEBUG"
       - "--metrics"
-      - "--entryPoints='Name:http Address::80'"
       - "--entryPoints='Name:dash Address::8080 Auth.Basic.Users:admin:$$apr1$A3524hz3$$4k45BqlgN1aiwOs1pjMD9.'"
     ports:
       - target: 80
@@ -23,7 +22,6 @@ services:
     labels:
       - "traefik.frontend.rule=Host:web.localhost"
       - "traefik.port=8080"
-      - "traefik.docker.network=inbound"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
