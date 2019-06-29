@@ -1,0 +1,9 @@
+version: 2  
+jobs:
+  build:
+    machine: true 
+working_directory: ~/traefik-template
+    steps:
+        - checkout
+        - run: docker network create proxy
+        - run: docker-compose up -d
