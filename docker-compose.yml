@@ -2,7 +2,7 @@ version: '3'
 
 services:
   traefik:
-    image: traefik:v1.7
+    image: traefik:v1.7.24
     command: --docker
     ports:
       - 80:80
@@ -21,7 +21,8 @@ services:
       - proxy
     labels: 
       - "traefik.enable=true"
-      - "traefik.frontend.rule=PathPrefix:/static/"
+      - "traefik.port=80"
+      - "traefik.frontend.rule=Host:localhost"
       - "traefik.docker.network=proxy"
   influxdb:
     image: quay.io/influxdb/influxdb:2.0.0-alpha
