@@ -25,7 +25,7 @@ services:
       - "traefik.frontend.rule=Host:localhost"
       - "traefik.docker.network=proxy"
   influxdb:
-    image: quay.io/influxdb/influxdb:2.0.6
+    image: quay.io/influxdb/influxdb:v2.0.6
     networks: 
       - proxy
     labels:
